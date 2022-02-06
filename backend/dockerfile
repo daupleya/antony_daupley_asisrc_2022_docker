@@ -1,0 +1,17 @@
+FROM node:16.13.2-alpine
+
+# creation du dossier app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# installation des dépendances de l'application 
+COPY package.json yarn.lock .
+RUN yarn install
+
+# copie de l'app dans le container
+COPY . .
+
+# définission du port d'écoute
+EXPOSE 4000
+
+CMD ["yarn","start"]
